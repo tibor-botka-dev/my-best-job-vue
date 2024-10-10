@@ -1,0 +1,26 @@
+.navbar {
+    padding: 0.5rem 1rem;
+    align-items: center;
+    -webkit-box-align: center;
+}
+
+.nav-border-bottom {
+    border-bottom: 2px solid $marked-color !important;
+}
+
+.text-marked-color {
+    color: $marked-color;
+}
+
+.text-marked-color:hover {
+    color: $marked-color;
+}
+
+.no-mask-image {
+    mask-image: none !important;
+    background: none !important;
+}
+
+.preview-avatar .b-avatar-img img {
+    object-fit: initial !important;
+}
