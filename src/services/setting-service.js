@@ -18,15 +18,6 @@ const settingService = {
 
         return response;
     },
-    async updateIdleSetting(data) {
-        const response = await sendRequest(
-            "put",
-            store.state.urls.updateIdleSettingUrl,
-            data
-        );
-
-        return response;
-    },
     async updateMailSetting(data) {
         const response = await sendRequest(
             "put",

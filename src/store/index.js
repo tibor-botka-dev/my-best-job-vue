@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import i18n from "@/assets/localizations/index";
 
 Vue.use(Vuex);
 
@@ -8,11 +9,14 @@ const store = new Vuex.Store({
   state: {
     isAuthenticationPage: null,
     authentication: {
-      accessToken: null,
-      accessTokenExpires: null,
-      refreshToken: null,
-      refreshTokenExpires: null,
+      tokens: {
+        accessToken: null,
+        accessTokenExpires: null,
+        refreshToken: null,
+        refreshTokenExpires: null,
+      },
       isLoggedIn: null,
+      language: null,
       currentUser: {
         email: null,
         firstName: null,
@@ -27,46 +31,50 @@ const store = new Vuex.Store({
     regexPatterns: {},
     roles: [],
     initialized: null,
+    languages: [],
+    defaultLanguage: null,
     googleSignInUrl: null,
     googleSignUpUrl: null,
     facebookSetting: {
       appId: null
     },
-    idleSetting: {
-      id: null,
-      creatorUserId: null,
-      duration: null,
-      reminder: null,
-      wait: null,
-      loop: null,
-      inBackground: null,
-      turnedOn: null
-    },
   },
   getters: {
     getAccessToken(state) {
-      var accessToken = state.authentication.accessToken
+      var accessToken = state.authentication.tokens.accessToken
         || localStorage.getItem("my-best-job-accessToken");
 
       return accessToken;
     },
     getAccessTokenExpires(state) {
-      var accessTokenExpires = state.authentication.accessTokenExpires
+      var accessTokenExpires = state.authentication.tokens.accessTokenExpires
         || localStorage.getItem("my-best-job-accessTokenExpires");
 
       return accessTokenExpires;
     },
     getRefreshToken(state) {
-      var refreshToken = state.authentication.refreshToken
+      var refreshToken = state.authentication.tokens.refreshToken
         || localStorage.getItem("my-best-job-refreshToken");
 
       return refreshToken;
     },
     getRefreshTokenExpires(state) {
-      var refreshTokenExpires = state.authentication.refreshTokenExpires
+      var refreshTokenExpires = state.authentication.tokens.refreshTokenExpires
         || localStorage.getItem("my-best-job-refreshTokenExpires");
 
       return refreshTokenExpires;
+    },
+    getLanguage(state) {
+      if (!state.authentication.language) {
+        var defaultLanguage = state.languages.find((x) => x.extendedName == state.defaultLanguage);
+        if (!defaultLanguage) {
+          const defaultLocale = i18n.locale;
+          state.authentication.language = { extendedName: defaultLocale };
+        } else
+          state.authentication.language = defaultLanguage;
+      }
+
+      return state.authentication.language;
     },
     parseJwt(_state, getters) {
       const accessToken = getters.getAccessToken;
@@ -105,12 +113,20 @@ const store = new Vuex.Store({
             state.regexPatterns[key] = new RegExp(value);
           }
 
-        state.idleSetting = data.idleSetting;
+        state.defaultLanguage = data.defaultLanguage;
+        state.languages = data.languages;
         state.googleSignInUrl = data.googleSignInUrl;
         state.googleSignUpUrl = data.googleSignUpUrl;
         // state.facebookSetting = data.facebookSetting;
 
         state.initialized = true;
+      }
+    },
+    setLanguage(state, language) {
+      if (language) {
+        state.authentication.language = language;
+        i18n.locale = language.extendedName;
+        i18n.fallbackLocale = i18n.messages[language.extendedName];
       }
     },
     saveTokenData(state, data) {
@@ -119,14 +135,13 @@ const store = new Vuex.Store({
       localStorage.setItem("my-best-job-refreshToken", data.refreshToken);
       localStorage.setItem("my-best-job-refreshTokenExpires", data.refreshTokenExpires);
 
-      // const currentUser = JSON.parse(decryptedAccessToken.currentUser);
-      state.authentication = {
+      state.authentication.tokens = {
         accessToken: data.accessToken,
         refreshToken: data.refreshToken,
         accessTokenExpires: null,
-        refreshTokenExpires: null,
-        isLoggedIn: true
+        refreshTokenExpires: null
       };
+      state.authentication.isLoggedIn = true;
     },
     updateTokenExpiration(state) {
       const decryptedAccessToken = this.getters.parseJwt;
@@ -136,7 +151,7 @@ const store = new Vuex.Store({
         return;
       }
 
-      state.authentication.accessTokenExpires = decryptedAccessToken.exp;
+      state.authentication.tokens.accessTokenExpires = decryptedAccessToken.exp;
 
       const currentUser = JSON.parse(decryptedAccessToken.currentUser);
       state.authentication.currentUser = {
@@ -154,11 +169,14 @@ const store = new Vuex.Store({
       localStorage.removeItem("my-best-job-refreshTokenExpires");
 
       state.authentication = {
-        accessToken: null,
-        accessTokenExpires: null,
-        refreshToken: null,
-        refreshTokenExpires: null,
+        tokens: {
+          accessToken: null,
+          accessTokenExpires: null,
+          refreshToken: null,
+          refreshTokenExpires: null,
+        },
         isLoggedIn: null,
+        language: null,
         currentUser: {
           email: null,
           firstName: null,

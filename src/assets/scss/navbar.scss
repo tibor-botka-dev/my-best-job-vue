@@ -1,19 +1,5 @@
-.navbar {
-    padding: 0.5rem 1rem;
-    align-items: center;
-    -webkit-box-align: center;
-}
-
 .nav-border-bottom {
-    border-bottom: 2px solid $marked-color !important;
-}
-
-.text-marked-color {
-    color: $marked-color;
-}
-
-.text-marked-color:hover {
-    color: $marked-color;
+    border-bottom: 3px solid $marked-color;
 }
 
 .no-mask-image {

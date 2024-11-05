@@ -1,0 +1,23 @@
+{
+    "Nyelviesítés teszt": "This is a test for translation.",
+    "Nyelviesítés teszt paraméterrel": "This is a translation test with parameter: %{parameter}.",
+    "Oops, a keresett oldal nem található": "",
+    "Bejelentkezés": "Sign in",
+    "Regisztráció": "Sign up",
+    "Vissza": "Back",
+    "Oops, nincs hozzáférése az oldalhoz": "Oops, nincs hozzáférése az oldalhoz.",
+    "Nincs hozzáférése az oldal megtekintéséhez": "Nincs hozzáférése az oldal megtekintéséhez",
+    "Oops, a szerver nem elérhető": "Oops, a szerver nem elérhető.",
+    "Főoldal": "Homepage",
+    "A webszerver nem elérhető": "A webszerver nem elérhető",
+    "Kérem várjon, majd": "Kérem várjon, majd egy kis idő múlva lépjen vissza a főoldalra vagy vegye fel a kapcsolatot a rendszergazdával.",
+    "Profil": "Profile",
+    "Szociális média": "Social media",
+    "Szórakozás": "Entertainment",
+    "Játékok": "Games",
+    "AI": "Artificial intelligence",
+    "Keresés": "Search here...",
+    "A felhasználó nincs hitelesítve": "User unauthorized",
+    "Az oldal nem elérhető": "Page unavailable",
+    "Az oldal nem található": "Page not found"
+}

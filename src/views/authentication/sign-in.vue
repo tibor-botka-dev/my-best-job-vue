@@ -1,62 +1,54 @@
 <template>
-  <div class="row text-light">
-    <div class="offset-md-2 col-md-8">
-      <div v-if="googleSignInUrl" class="form-group text-center">
-        <a :href="googleSignInUrl" class="btn btn-lg btn-primary">
-          <i class="fab fa-google fa-5x pb-2 text-success"></i>
-          <h3 class="title">Bejelentkezés</h3>
-        </a>
-        <input-footer tooltip="Bejelentkezés Google szolgáltatással" />
-      </div>
-      <hr class="divider" />
+  <div class="col-auto">
+    <google-button :url="googleSignInUrl" :text="$t('Folytatás Google-al')"></google-button>
+    <hr class="divider" />
 
-      <div class="form-group">
-        <label for="email">
-          Email cím
-          <span class="h4 text-danger">
-            <strong>*</strong>
-          </span>
-        </label>
-        <input id="email" type="email" class="form-control" v-model="loginData.email" required autocomplete="email" />
-        <input-footer :validation="validationMessages.email" message="Email cím mező kötelező"
-          tooltip="Érvényes email címnek kell lennie" />
-      </div>
-
-      <div class="form-group">
-        <label for="password">
-          Jelszó
-          <span class="h4 text-danger">
-            <strong>*</strong>
-          </span>
-        </label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <button class="btn btn-secondary" type="button" @click="passwordType = showPassword(passwordType)">
-              <i class="fas fa-eye" v-if="passwordType == 'password'"></i>
-              <i class="fas fa-eye-slash" v-else></i>
-            </button>
-          </div>
-          <input id="password" v-model="loginData.password" :type="passwordType" class="form-control" />
-        </div>
-        <input-footer :validation="validationMessages.password" message="Jelszó mező kötelező"
-          tooltip="Minimum 6, maximum 12 karaktert, legalább 1 nagybetűt, 1 kisbetűt, 1 számot és 1 speciális karaktert @$!%*_=():.?& kell tartalmaznia" />
-      </div>
-
-      <div class="mt-4 mb-5 text-center">
-        <button type="button" class="btn btn-lg btn-primary" @click="signIn">
-          <i class="fas fa-sign-in"></i>
-          Bejelentkezés
-        </button>
-      </div>
-
-      <h5 class="font-italic text-center text-md-left">
-        <router-link :to="{ name: 'forgotPassword' }" class="text-info">
-          <u>
-            <strong>Kattintson ide</strong>, ha elfelejtette jelszavát.
-          </u>
-        </router-link>
-      </h5>
+    <div class="form-group">
+      <label for="email">
+        Email cím
+        <span class="h4 text-danger">
+          <strong>*</strong>
+        </span>
+      </label>
+      <input id="email" type="email" class="form-control" v-model="loginData.email" required autocomplete="email" />
+      <input-footer :validation="validationMessages.email" message="Email cím mező kötelező"
+        tooltip="Érvényes email címnek kell lennie" />
     </div>
+
+    <div class="form-group">
+      <label for="password">
+        Jelszó
+        <span class="h4 text-danger">
+          <strong>*</strong>
+        </span>
+      </label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <button class="btn btn-secondary" type="button" @click="passwordType = showPassword(passwordType)">
+            <i class="fas fa-eye" v-if="passwordType == 'password'"></i>
+            <i class="fas fa-eye-slash" v-else></i>
+          </button>
+        </div>
+        <input id="password" v-model="loginData.password" :type="passwordType" class="form-control" />
+      </div>
+      <input-footer :validation="validationMessages.password" message="Jelszó mező kötelező"
+        tooltip="Minimum 6, maximum 12 karaktert, legalább 1 nagybetűt, 1 kisbetűt, 1 számot és 1 speciális karaktert @$!%*_=():.?& kell tartalmaznia" />
+    </div>
+
+    <div class="mt-4 mb-5 text-center">
+      <button type="button" class="btn btn-lg btn-primary" @click="signIn">
+        <i class="fas fa-sign-in"></i>
+        Bejelentkezés
+      </button>
+    </div>
+
+    <h5 class="font-italic text-center text-md-left">
+      <router-link :to="{ name: 'forgotPassword' }" class="text-info">
+        <u>
+          <strong>Kattintson ide</strong>, ha elfelejtette jelszavát.
+        </u>
+      </router-link>
+    </h5>
   </div>
 </template>
 

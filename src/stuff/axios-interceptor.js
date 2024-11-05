@@ -4,19 +4,22 @@ import store from "../store/index";
 import { apiHost } from "../vue.config";
 import tokenService from "../services/token-service";
 import authenticationService from "../services/authentication-service";
-import router from "../router/index";
 
 const axiosApiInstance = axios.create({ baseURL: apiHost });
 
 // Request interceptor for API calls
 axiosApiInstance.interceptors.request.use((config) => {
     const accessToken = store.getters.getAccessToken;
+    const language = store.getters.getLanguage;
     if (accessToken) {
         config.headers = {
             'Authorization': `Bearer ${accessToken}`,
             'Accept': 'application/json'
         }
     }
+
+    if (language)
+        config.headers['Accept-Language'] = language.extendedName;
 
     config.headers['Access-Control-Allow-Origin'] = "*";
 
@@ -45,9 +48,11 @@ axiosApiInstance.interceptors.response.use(async (response) => {
     var isTokenRefreshed = await tokenService.refreshToken();
     if (error.response?.headers["token-expired"] && isTokenRefreshed) {
         const accessToken = store.getters.getAccessToken;
+        const language = store.getters.getLanguage;
         error.config.headers = {
             'Authorization': `Bearer ${accessToken}`,
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'Accept-Language': language.extendedName
         }
 
         return axiosApiInstance(error.config);

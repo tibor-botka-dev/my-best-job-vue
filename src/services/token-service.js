@@ -7,10 +7,10 @@ const tokenService = {
         if (!store.getters.getAccessToken || !store.getters.getRefreshToken)
             return false;
 
-        var accessTokenExpires = store.state.authentication.accessTokenExpires;
+        var accessTokenExpires = store.state.authentication.tokens.accessTokenExpires;
         if (!accessTokenExpires) {
             store.commit("updateTokenExpiration");
-            accessTokenExpires = store.state.authentication.accessTokenExpires;
+            accessTokenExpires = store.state.authentication.tokens.accessTokenExpires;
         }
 
         var nowDate = parseInt(Date.now() / 1000);

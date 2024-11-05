@@ -6,6 +6,7 @@
     <small v-if="tooltip" v-html="tooltip" class="m-0 form-text font-weight-bold text-primary"> </small>
   </figure>
 </template>
+
 <script>
 export default {
   name: "input-footer",

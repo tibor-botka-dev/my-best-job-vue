@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <img alt="Vue logo" src="../assets/img/logo.png" />
     <ul>
       <strong>My best job honlapja!</strong>
       <br>

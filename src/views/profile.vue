@@ -3,19 +3,19 @@
     <div class="col-xl-6">
       <div class="form-group">
         <label for="lastName">
-          Vezetéknév
+          {{ $t("Vezetéknév") }}
           <span class="h4 text-danger">
             <strong>*</strong>
           </span>
         </label>
         <input id="lastName" class="form-control" v-model="profileData.lastName" required autocomplete="given-name" />
-        <input-footer :validation="validationMessages.lastName" message="Vezetéknév mező kötelező"
-          tooltip="1-30 karakter hosszú lehet" />
+        <input-footer :validation="validationMessages.lastName" :message="$t('Vezetéknév mező kötelező')"
+          :tooltip="$t('1-30 karakter hosszú lehet')" />
       </div>
 
       <div class="form-group row mb-0">
         <div class="col-md-12">
-          <label>Teljes név</label>
+          <label>{{ $t("Teljes név") }}</label>
           <p class="text-info">
             <strong>{{ profileData.fullName }}</strong>
           </p>
@@ -24,40 +24,39 @@
 
       <div class="form-group">
         <label for="email">
-          Email cím
+          {{ $t("Email cím") }}
           <span class="h4 text-danger">
             <strong>*</strong>
           </span>
         </label>
         <input id="email" type="email" class="form-control" v-model="profileData.email" required autocomplete="email" />
         <a v-if="emailIsValid" class="h6 text-info" :href="`mailto:${profileData.email}`"><span class="text-success">{{
-          profileData.email }}</span> címre email
-          küldés</a>
-        <input-footer :validation="validationMessages.email" message="Email cím mező kötelező"
-          tooltip="Érvényes email címnek kell lennie" />
+          profileData.email }}</span> {{ $t("címre email küldés") }}</a>
+        <input-footer :validation="validationMessages.email" :message="$t('Email cím mező kötelező')"
+          :tooltip="$t('Érvényes email címnek kell lennie')" />
       </div>
     </div>
 
     <div class="col-xl-6">
       <div class="form-group">
         <label for="firstName">
-          Keresztnév
+          {{ $t("Keresztnév") }}
           <span class="h4 text-danger">
             <strong>*</strong>
           </span>
         </label>
         <input id="firstName" class="form-control" v-model="profileData.firstName" required
           autocomplete="family-name" />
-        <input-footer :validation="validationMessages.firstName" message="Keresztnév mező kötelező"
-          tooltip="1-30 karakter hosszú lehet" />
+        <input-footer :validation="validationMessages.firstName" :message="$t('Keresztnév mező kötelező')"
+          :tooltip="$t('1-30 karakter hosszú lehet')" />
       </div>
 
       <div class="form-group">
-        <label for="photo">Profilkép</label>
+        <label for="photo">{{ $t("Profilkép") }}</label>
         <div class="row">
           <div class="col-md-7">
             <b-form-file id="photo" v-model="profileData.newAvatar" accept=".jpg, .png, .gif" :state="avatarIsValid"
-              placeholder="Válasszon egy képet vagy húzza ide..." drop-placeholder="Húzza ide...">
+              :placeholder="$t('Válasszon egy képet vagy húzza ide...')" :drop-placeholder="$t('Húzza ide...')">
             </b-form-file>
           </div>
           <div class="col-md-3 text-center">
@@ -67,19 +66,20 @@
           <div class="col-md-2 text-center">
             <button :disabled="!profileData.newAvatar" class="btn btn-danger" @click="deleteAvatar">
               <i class="fas fa-trash-alt"></i>
-              Kép törlése
+              {{ $t("Kép törlése") }}
             </button>
           </div>
         </div>
-        <input-footer :validation="validationMessages.newAvatar" message="Profilkép érvénytelen, így nem lesz mentve"
-          tooltip="Jpg, png, gif kiterjesztésű képet tölthet fel maximum 5MB méretben" />
+        <input-footer :validation="validationMessages.newAvatar"
+          :message="$t('Profilkép érvénytelen, így nem lesz mentve')"
+          :tooltip="$t('Jpg, png, gif kiterjesztésű képet tölthet fel maximum 5MB méretben')" />
       </div>
     </div>
 
     <div class="col-md-6 d-flex align-items-center offset-md-3">
       <button :disabled="canSave" type="button" class="btn btn-lg btn-primary" @click="saveProfile()">
         <i class="fas fa-save"></i>
-        Mentés
+        {{ $t("Mentés") }}
       </button>
 
       <b-avatar v-if="profileData.avatarBase64" :src="profileData.avatarBase64"
@@ -95,7 +95,7 @@ import { mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {
-      title: "Személyes adatok",
+      title: this.$t("Személyes adatok"),
       profileData: {
         lastName: null,
         firstName: null,
