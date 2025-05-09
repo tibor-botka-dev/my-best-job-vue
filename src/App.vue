@@ -1,27 +1,30 @@
 <template>
   <div>
+    <!-- <loading /> -->
+
     <navbar />
 
-    <main class="container">
-      <div class="row mt-5 justify-content-center">
-        <router-view class="pb-3 text-light"></router-view>
+    <!-- <main class="container-fluid mt-3">
+      <router-view></router-view>
+    </main> -->
+    <router-view></router-view>
 
-        <loading />
-      </div>
-    </main>
+    <!-- <footer-panel /> -->
   </div>
 </template>
 
 <script>
 import navbar from "./components/navbar";
 import loading from "./components/loading";
+import footerPanel from "./components/footer-panel";
 import initService from "./services/init-service";
 import { mapState, mapMutations } from "vuex";
 
 export default {
   components: {
     navbar,
-    loading
+    loading,
+    footerPanel
   },
   computed: {
     ...mapState(["initialized"])
@@ -37,7 +40,7 @@ export default {
         this.showToast(
           this.$t("Hiba az adatok betöltésekor"),
           this.$t("Adatok betöltése nem sikerült"),
-          response.data
+          response?.data || this.$t("A szerver nem elérhető")
         );
     }
   },

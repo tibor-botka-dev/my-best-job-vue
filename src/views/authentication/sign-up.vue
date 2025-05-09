@@ -3,8 +3,8 @@
     <div class="offset-md-2 col-md-8">
       <div v-if="googleSignUpUrl" class="form-group text-center">
         <a :href="googleSignUpUrl" class="btn btn-lg btn-primary">
-          <i class="fab fa-google fa-5x pb-2 text-success"></i>
-          <h3 class="title">Regisztráció</h3>
+          <i class="fab fa-google pb-2 text-success"></i>
+          <!-- <h4>Regisztráció</h4> -->
         </a>
         <input-footer tooltip="Regisztráció Google szolgáltatással" />
       </div>

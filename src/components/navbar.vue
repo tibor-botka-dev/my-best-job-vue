@@ -1,18 +1,87 @@
 <template>
-  <b-navbar v-if="initialized" class="nav-border-bottom justify-content-center" toggleable="lg" sticky type="dark"
+  <header class="header style4">
+    <div class="navbar-area">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-12">
+            <nav class="navbar navbar-expand-lg">
+              <a class="navbar-brand logo" href="/">
+                <img class="logo1" src="../assets/img/logo.svg" alt="Logo" />
+              </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                <ul id="nav" class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a class="active" href="/">{{ $t("Főoldal") }}</a>
+                  </li>
+                  <li class="nav-item"><a href="#">Pages</a>
+                    <ul class="sub-menu">
+                      <li><a href="about-us.html">About Us</a></li>
+                      <li><a href="job-list.html">Job List</a></li>
+                      <li><a href="job-details.html">Job Details</a></li>
+                      <li><a href="resume.html">Resume Page</a></li>
+                      <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                      <li><a href="faq.html">Faq</a></li>
+                      <li><a href="pricing.html">Our Pricing</a></li>
+                      <li><a href="404.html">404 Error</a></li>
+                      <li><a href="mail-success.html">Mail Success</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item"><a href="#">{{ $t("Munkavállalóknak") }}</a>
+                    <ul class="sub-menu">
+                      <li><a href="browse-jobs.html">Browse Jobs</a></li>
+                      <li><a href="browse-categories.html">Browse Categories</a></li>
+                      <li><a href="add-resume.html">Add Resume</a></li>
+                      <li><a href="job-alerts.html">Job Alerts</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item"><a href="#">{{ $t("Munkáltatóknak") }}</a>
+                    <ul class="sub-menu">
+                      <li><a href="post-job.html">Add Job</a></li>
+                      <li><a href="manage-jobs.html">Manage Jobs</a></li>
+                      <li><a href="manage-applications.html">Manage Applications</a></li>
+                      <li><a href="manage-resumes.html">Manage Resume</a></li>
+                      <li><a href="browse-resumes.html">Browse Resumes</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item"><a href="#">{{ $t("Blog") }}</a>
+                    <ul class="sub-menu">
+                      <li><a href="blog-grid-sidebar.html">Blog Grid Sidebar</a></li>
+                      <li><a href="blog-single.html">Blog Single</a></li>
+                      <li><a href="blog-single-sidebar.html">Blog Single Sibebar</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item"><a href="/contact">{{ $t("Kapcsolat") }}</a> </li>
+                </ul>
+              </div>
+
+              <div class="button">
+                <a href="javacript:" data-toggle="modal" data-target="#login" class="login"><i
+                    class="lni lni-lock-alt"></i> Login</a>
+                <a href="javacript:" data-toggle="modal" data-target="#signup" class="btn">Sign Up</a>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- <b-navbar v-if="initialized" class="nav-border-bottom justify-content-center" toggleable="lg" sticky type="dark"
     variant="dark">
     <b-navbar-brand href="/" class="d-flex align-items-center font-weight-bold">
-      <img src="../assets/img/logo.svg" alt="My Best Job logo" />
+      <img class="logo mr-3" src="../assets/img/logo.svg" alt="My Best Job logo" />
       My Best Job
     </b-navbar-brand>
 
-    <div class="col-auto ml-0 ml-lg-5">
-      <gb-badge filled="true">{{ title }}</gb-badge>
-    </div>
-
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-    <b-collapse id="nav-collapse" is-nav class="col-auto">
-      <b-navbar-nav class="ml-auto mr-auto align-items-center">
+    <b-collapse id="nav-collapse" is-nav class="col-auto pr-0">
+      <b-navbar-nav class="mx-auto align-items-center">
         <b-nav-item v-if="authentication.isLoggedIn" href="/profile">
           <span v-if="avatar" class="b-avatar no-mask-image b-avatar-lg badge-primary rounded-circle">
             <span class="b-avatar-img"><img :src="avatar" alt="avatar"></span>
@@ -57,30 +126,34 @@
           </b-dropdown-item-button>
         </b-nav-item-dropdown>
 
+        <b-nav-item href="/">{{ $t("Főoldal") }}</b-nav-item>
         <b-nav-item href="/tasks">{{ $t("Feladatok") }}</b-nav-item>
       </b-navbar-nav>
 
-      <b-navbar-nav class="align-items-center">
-        <b-nav-item href="/sign-in">{{ $t("Bejelentkezés") }}</b-nav-item>
+      <b-navbar-nav class="mx-auto align-items-center">
+        <b-nav-item v-if="!authentication.isLoggedIn" href="/sign-in">{{ $t("Bejelentkezés") }}</b-nav-item>
         <b-nav-item href="/sign-up">{{ $t("Regisztráció") }}</b-nav-item>
+      </b-navbar-nav>
 
-        <div class="d-flex">
-          <button class="btn btn-outline-primary mx-2" @click="search">
-            <i class="fa fa-search"></i>
-          </button>
-          <label for="search" class="d-none"> </label>
-          <input id="search" class="mr-sm-2 form-control" @keyup.enter="search" v-model="searchText"
+      <div class="form-inline row">
+        <div class="col-6 input-group">
+          <input id="search" class="form-control" @keyup.enter="search" v-model="searchText"
             :placeholder="$t('Keresés...')" />
+          <div class="input-group-append">
+            <button class="btn btn-outline-primary" @click="search" title="search">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
         </div>
 
-        <div class="d-flex mt-2 mt-lg-0">
-          <gb-select v-if="languageOptions" class="w-min-140" :options="languageOptions" :value="selectedLanguage"
+        <div class="col-6">
+          <gb-select class="w-100 d-inline" v-if="languageOptions" :options="languageOptions" :value="getLanguage"
             :searchable="false" :clearable="false" @change="selectedLanguageChanged">
           </gb-select>
         </div>
-      </b-navbar-nav>
+      </div>
     </b-collapse>
-  </b-navbar>
+  </b-navbar> -->
 </template>
 
 <script>
@@ -95,11 +168,8 @@ export default {
     };
   },
   computed: {
-    ...mapState(["initialized", "title", "authentication", "roles", "avatar", "languages"]),
+    ...mapState(["initialized", "authentication", "roles", "avatar", "languages"]),
     ...mapGetters(["getLanguage"]),
-    selectedLanguage() {
-      return this.getLanguage?.extendedName;
-    },
     languageOptions() {
       var result = [];
       this.languages.forEach((x) => {

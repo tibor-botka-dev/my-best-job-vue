@@ -1,6 +1,6 @@
 <template>
   <div class="col-auto">
-    <google-button :url="googleSignInUrl" :text="$t('Folytatás Google-al')"></google-button>
+    <google-button :url="googleSignInUrl" :text="$t('Belépés Google-al')"></google-button>
     <hr class="divider" />
 
     <div class="form-group">

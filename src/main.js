@@ -10,7 +10,7 @@ import VueDarkMode from "@growthbunker/vuedarkmode";
 import { BootstrapVue } from "bootstrap-vue";
 
 import "./assets/scss/app.scss";
-import "../node_modules/bootstrap-vue/dist/bootstrap-vue.css";
+// import "../node_modules/bootstrap-vue/dist/bootstrap-vue.css";
 
 import inputFooter from "./components/global/input-footer";
 import googleButton from "./components/global/google-button";

@@ -51,10 +51,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach(async (to, _, next) => {
-  await initService.beforeLoadInitApp().catch(_ => {
-    return next({ path: "/unavailable" });
-  });
-
   const { authorize } = to.meta;
 
   if (!authorize)
@@ -63,6 +59,8 @@ router.beforeEach(async (to, _, next) => {
   const tokenActive = await tokenService.isTokenActive();
   if (!tokenActive)
     return next({ path: "/sign-in" });
+
+  // await initService.beforeLoadInitApp();
 
   var hasAccess = store.state.roles.find(x => authorize.some(y => y == x.name))?.hasUserAccess;
   if (!hasAccess && authorize.length)

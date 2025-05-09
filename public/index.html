@@ -3,20 +3,105 @@
 
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-  <title>
-    <%= htmlWebpackPlugin.options.title %>
-  </title>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>My Best Job - Job Portal</title>
+
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" type="image/x-icon" href="<%= BASE_URL %>favicon.ico">
+
+  <!-- ========================= CSS here ========================= -->
+  <!-- <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/LineIcons.2.0.css" />
+  <link rel="stylesheet" href="css/animate.css" />
+  <link rel="stylesheet" href="css/tiny-slider.css" />
+  <link rel="stylesheet" href="css/glightbox.min.css" />
+  <link rel="stylesheet" href="css/main.css" /> -->
 </head>
 
 <body>
+  <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+  <![endif]-->
+
   <noscript>
     <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
         Please enable it to continue.</strong>
   </noscript>
+
+  <!-- ========================= VUE app ========================= -->
   <div id="app"></div>
+
+  <!-- ========================= Javascript files ========================= -->
+  <!-- <script src="js/bootstrap.min.js"></script>
+  <script src="js/wow.min.js"></script>
+  <script src="js/tiny-slider.js"></script>
+  <script src="js/glightbox.min.js"></script>
+  <script src="js/main.js"></script>
+  <script type="text/javascript">
+    //====== Clients Logo Slider
+    tns({
+      container: '.client-logo-carousel',
+      slideBy: 'page',
+      autoplay: true,
+      autoplayButtonOutput: false,
+      mouseDrag: true,
+      gutter: 15,
+      nav: false,
+      controls: false,
+      responsive: {
+        0: {
+          items: 1,
+        },
+        540: {
+          items: 2,
+        },
+        768: {
+          items: 3,
+        },
+        992: {
+          items: 4,
+        },
+        1170: {
+          items: 6,
+        }
+      }
+    });
+    //========= testimonial 
+    tns({
+      container: '.testimonial-slider',
+      items: 1,
+      slideBy: 'page',
+      autoplay: false,
+      mouseDrag: true,
+      gutter: 0,
+      nav: false,
+      controls: true,
+      controlsText: ['<i class="lni lni-arrow-left"></i>', '<i class="lni lni-arrow-right"></i>'],
+      responsive: {
+        0: {
+          items: 1,
+        },
+        540: {
+          items: 1,
+        },
+        768: {
+          items: 1,
+        },
+        992: {
+          items: 1,
+        },
+        1170: {
+          items: 1,
+        }
+      }
+    }); -->
+  </script>
 </body>
 
 </html>

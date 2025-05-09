@@ -5,7 +5,7 @@ import VueI18n from "vue-i18n";
 
 Vue.use(VueI18n);
 
-const defaultLocalization = "en-US";
+const defaultLocalization = "hu-HU";
 const localizations = {
     "en-US": en,
     "hu-HU": hu,

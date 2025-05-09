@@ -9,8 +9,6 @@ const initService = {
 
         if (response?.status?.toString().startsWith("20"))
             store.commit("setInit", response.data);
-        else
-            authenticationService.redirectUnavailable();
 
         return response;
     },

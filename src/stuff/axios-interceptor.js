@@ -5,10 +5,10 @@ import { apiHost } from "../vue.config";
 import tokenService from "../services/token-service";
 import authenticationService from "../services/authentication-service";
 
-const axiosApiInstance = axios.create({ baseURL: apiHost });
+const axiosApiInstance = axios.create({ baseURL: apiHost, timeout: 3 * 60 * 1000 });
 
 // Request interceptor for API calls
-axiosApiInstance.interceptors.request.use((config) => {
+axiosApiInstance.interceptors.request.use(async config => {
     const accessToken = store.getters.getAccessToken;
     const language = store.getters.getLanguage;
     if (accessToken) {
@@ -19,7 +19,7 @@ axiosApiInstance.interceptors.request.use((config) => {
     }
 
     if (language)
-        config.headers['Accept-Language'] = language.extendedName;
+        config.headers['Accept-Language'] = language;
 
     config.headers['Access-Control-Allow-Origin'] = "*";
 
@@ -27,32 +27,30 @@ axiosApiInstance.interceptors.request.use((config) => {
 
     return config;
 }, error => {
-    Promise.reject(error)
+    return Promise.reject(error);
 });
 
 // Response interceptor for API calls
-axiosApiInstance.interceptors.response.use(async (response) => {
+axiosApiInstance.interceptors.response.use(async response => {
     var isTokenActive = await tokenService.isTokenActive();
     var isTokenRefreshed = await tokenService.refreshToken();
 
-    if (!isTokenActive)
-        // Setup "token-expired" header in 'Startup.cs'-> OnAuthenticationFailed event
-        if (response.headers["token-expired"] === "true" && isTokenRefreshed)
-            return Promise.resolve(response);
-
-    if (response.status.toString().startsWith("20"))
-        return Promise.resolve(response);
+    // Setup "token-expired" header in 'Startup.cs'-> OnAuthenticationFailed event
+    if ((!isTokenActive && response.headers["token-expired"] === "true" && isTokenRefreshed)
+        || response.status.toString().startsWith("20"))
+        return response;
 
     return Promise.reject(response);
-}, async (error) => {
+}, async error => {
+    debugger;
     var isTokenRefreshed = await tokenService.refreshToken();
     if (error.response?.headers["token-expired"] && isTokenRefreshed) {
         const accessToken = store.getters.getAccessToken;
         const language = store.getters.getLanguage;
         error.config.headers = {
             'Authorization': `Bearer ${accessToken}`,
-            'Accept': 'application/json',
-            'Accept-Language': language.extendedName
+            'Accept': 'application/json; charset=utf-8',
+            'Accept-Language': language
         }
 
         return axiosApiInstance(error.config);

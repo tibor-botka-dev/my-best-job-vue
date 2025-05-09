@@ -101,8 +101,7 @@ export default {
         firstName: null,
         fullName: null,
         email: null,
-        newAvatar: null,
-        avatar: null,
+        newAvatar: null
       },
       submitted: null
     };

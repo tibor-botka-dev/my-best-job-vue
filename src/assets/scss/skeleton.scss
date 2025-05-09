@@ -1,79 +1,30 @@
-body,
-html {
-  height: 100%;
-  min-height: 100%;
-  margin: 0 auto;
-  padding: 0;
-  font-family: Ubuntu;
-  font-size: 16px;
-  color: #545454;
-}
-
-[class^="gb-"]:not(.gb-base-icon) {
-  font-family: Ubuntu !important;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-// .text-highlight {
-//   color: $highlight-color;
+// body,
+// html {
+//   height: 100%;
+//   min-height: 100%;
+//   margin: 0 auto;
+//   padding: 0;
+//   font-family: Ubuntu;
+//   font-size: 14px;
+//   color: #545454;
 // }
 
-// .text-marked {
-//   color: $marked-color;
+// span {
+//   font-family: Ubuntu;
 // }
 
-// .bg-highlight {
-//   background-color: $highlight-color;
+// [class^="gb-"]:not(.gb-base-icon) {
+//   font-family: Ubuntu !important;
+//   font-weight: bold;
+//   letter-spacing: 1px;
 // }
 
-// .bg-marked {
-//   background-color: $marked-color;
+// .logo {
+//   width: 50px;
 // }
 
-// .poppins {
-//   font-family: "poppins";
-// }
-
-// .page-title {
-//   font-family: poppins;
-//   font-size: 48px;
-//   font-weight: 700;
-//   color: $highlight-color;
-//   text-align: center;
-// }
-
-// .title {
-//   font-family: poppins;
-//   font-weight: 700
-// }
-
-// .divider {
-//   width: 90%;
-//   border-width: 4px;
-//   background-color: $marked-color;
-//   margin-top: 1.5rem;
-// }
-
-// table * {
-//   cursor: default;
-
-//   td {
-//     vertical-align: middle !important;
-//     text-align: center !important;
-//   }
-// }
-
-// .custom-file-input:lang(hu)~.custom-file-label::after {
-//   content: 'Megnyitás';
-// }
-
-// .avatar-icon {
-//   margin-top: -60px;
-// }
-
-// @media (max-width: 1199.98px) {
-//   .avatar-icon {
-//     margin-top: 0px;
-//   }
+// .footer {
+//   position: absolute;
+//   bottom: 0;
+//   width: 100%;
 // }

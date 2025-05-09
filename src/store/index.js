@@ -66,15 +66,18 @@ const store = new Vuex.Store({
     },
     getLanguage(state) {
       if (!state.authentication.language) {
-        var defaultLanguage = state.languages.find((x) => x.extendedName == state.defaultLanguage);
+        var defaultLanguage = state.languages.find(x =>
+          x.extendedName.toLowerCase() == state.defaultLanguage.toLowerCase())?.extendedName || state.defaultLanguage;
+
         if (!defaultLanguage) {
           const defaultLocale = i18n.locale;
-          state.authentication.language = { extendedName: defaultLocale };
-        } else
-          state.authentication.language = defaultLanguage;
+          defaultLanguage = state.languages.find(x => x.extendedName.toLowerCase() == defaultLocale.toLowerCase()
+            || x.shortName.toLowerCase() == defaultLocale.toLowerCase())?.extendedName
+            || defaultLocale;
+        }
       }
 
-      return state.authentication.language;
+      return state.authentication.language || defaultLanguage;
     },
     parseJwt(_state, getters) {
       const accessToken = getters.getAccessToken;
@@ -104,6 +107,7 @@ const store = new Vuex.Store({
     },
     setInit(state, data) {
       if (data) {
+        state.roles = data.roles;
         state.applicationName = data.applicationName;
         state.urls = data.urls;
         state.avatar = data.avatar;
@@ -113,7 +117,11 @@ const store = new Vuex.Store({
             state.regexPatterns[key] = new RegExp(value);
           }
 
-        state.defaultLanguage = data.defaultLanguage;
+        var defaultLanguage = data.languages.find(x => x.extendedName.toLowerCase() == navigator.language.toLowerCase()
+          || x.shortName.toLowerCase() == navigator.language.toLowerCase())?.extendedName
+          || data.defaultLanguage;
+
+        state.defaultLanguage = defaultLanguage;
         state.languages = data.languages;
         state.googleSignInUrl = data.googleSignInUrl;
         state.googleSignUpUrl = data.googleSignUpUrl;
@@ -124,7 +132,7 @@ const store = new Vuex.Store({
     },
     setLanguage(state, language) {
       if (language) {
-        state.authentication.language = language;
+        state.authentication.language = language.extendedName;
         i18n.locale = language.extendedName;
         i18n.fallbackLocale = i18n.messages[language.extendedName];
       }
