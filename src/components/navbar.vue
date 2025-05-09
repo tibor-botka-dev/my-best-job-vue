@@ -56,7 +56,7 @@
                       <li><a href="blog-single-sidebar.html">Blog Single Sibebar</a></li>
                     </ul>
                   </li>
-                  <li class="nav-item"><a href="/contact">{{ $t("Kapcsolat") }}</a> </li>
+                  <li class="nav-item"><a href="/contact">{{ $t("Tester") }}</a> </li>
                 </ul>
               </div>
 
