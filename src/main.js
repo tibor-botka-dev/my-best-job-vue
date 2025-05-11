@@ -7,7 +7,8 @@ import moment from "moment";
 import VuexRouterSync from "vuex-router-sync";
 import mixins from "./stuff/mixins";
 import VueDarkMode from "@growthbunker/vuedarkmode";
-import { BootstrapVue } from "bootstrap-vue";
+// import "bootstrap/dist/js/bootstrap";
+// import { BootstrapVue } from "bootstrap-vue";
 
 import "./assets/scss/app.scss";
 // import "../node_modules/bootstrap-vue/dist/bootstrap-vue.css";
@@ -19,7 +20,7 @@ moment.locale("hu");
 Vue.prototype.$moment = moment;
 
 Vue.use(VueDarkMode);
-Vue.use(BootstrapVue);
+// Vue.use(BootstrapVue);
 Vue.use(mixins);
 Vue.config.productionTip = false;
 

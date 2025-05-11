@@ -1,6 +1,7 @@
 <template>
   <div>
     <!-- <loading /> -->
+    <!-- <div id="loading-area"></div> -->
 
     <navbar />
 
@@ -19,6 +20,7 @@ import loading from "./components/loading";
 import footerPanel from "./components/footer-panel";
 import initService from "./services/init-service";
 import { mapState, mapMutations } from "vuex";
+// import "@/assets/js/main";
 
 export default {
   components: {

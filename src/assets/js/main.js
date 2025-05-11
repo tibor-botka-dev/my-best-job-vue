@@ -55,7 +55,7 @@ Author: GrayGrids
     //===== close navbar-collapse when a  clicked
     let navbarToggler = document.querySelector(".navbar-toggler");
     var navbarCollapse = document.querySelector(".collapse");
-
+    debugger;
     document.querySelectorAll(".page-scroll").forEach(e =>
         e.addEventListener("click", () => {
             navbarToggler.classList.remove("active");
@@ -69,5 +69,5 @@ Author: GrayGrids
     new WOW().init();
 
 
-    
+
 })();
